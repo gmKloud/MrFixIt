@@ -48,14 +48,16 @@ namespace MrFixIt.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        public IActionResult ClaimJob()
+        public IActionResult Claim(int id)
         {
-            //    var thisJob = db.Jobs.FirstOrDefault(m => m.JobId == id);
-            //    job.Worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
-            //    //thisJob.Add(worker);
-            //    db.Entry(job).State = EntityState.Modified;
-            //    db.SaveChanges();
-            return Content("Claimed Job - working simple Ajax", "text/plain");
+            var thisJob = db.Jobs.FirstOrDefault(m => m.JobId == id);
+            var getWorker = db.Jobs.Include(i => i.Worker).ToList();
+            Worker worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
+            //thisJob.Add(worker);
+            db.Entry(worker).State = EntityState.Modified;
+            db.Entry(thisJob).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(worker);
         }
     }
 }

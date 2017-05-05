@@ -7,14 +7,15 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".btn-info").click(function () {
-            console.log("I am clicked");
+        $(".claim-job").click(function () {
+            console.log(this.id);
+            var selectedJobToClaim = this.id;
             $.ajax({
                 type: 'GET',
-                @*data: { job: @Model.Job },
+                data: { id: selectedJobToClaim },
                 dataType: 'json',
-                contentType: 'application/json',*@
-                url: '@Url.Action("ClaimJob")',
+                contentType: 'application/json',
+                url: '@Url.Action("Claim")',
                 success: function (result) {
                     console.log(result);
                     $('#claim-job-display').html(result);
@@ -34,20 +35,23 @@
     <ul>
         <li>@Job.Title</li>
             <li>@Job.Description</li>
+    </ul>
         @if (Job.Worker == null)
         {
-        <li class="btn">This job is unclaimed. @*@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })*@
-        <button type="button" class="btn btn-info">Claim this Job</button>
+            <ul>
+        <li class="claim-job">This job is unclaimed. @*@Html.ActionLink("Claim This Job", "Jobs", new { @text = @Job.Title, id = Job.JobId })*@
+                <button type="button" class="claim-job btn btn-info">Claim this job</button>
         </li>
-        <li id="claim-job-display"></li>
-
+           </ul>
+            <div id="claim-job-display"></div>
         }
         else
         {
+        <ul>
             <li class="btn">This Job is claimed by @Job.Worker.FirstName @Job.Worker.LastName</li>
 
+        </ul>
         }
-    </ul>
 
     <hr />
 }
