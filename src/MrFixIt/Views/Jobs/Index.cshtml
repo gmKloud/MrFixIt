@@ -3,6 +3,28 @@
 *@
 @{
 }
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btn-info").click(function () {
+            console.log("I am clicked");
+            $.ajax({
+                type: 'GET',
+                @*data: { job: @Model.Job },
+                dataType: 'json',
+                contentType: 'application/json',*@
+                url: '@Url.Action("ClaimJob")',
+                success: function (result) {
+                    console.log(result);
+                    $('#claim-job-display').html(result);
+                }
+            });
+        });
+    });
+</script>
+
+
 <div class="text-center">
     <h3>Our Current Jobs</h3>
     @Html.ActionLink("Add a new job", "Create")
@@ -11,12 +33,14 @@
 {
     <ul>
         <li>@Job.Title</li>
-        <ul>
             <li>@Job.Description</li>
-        </ul>
         @if (Job.Worker == null)
         {
-        <li class="btn">This job is unclaimed. @Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</li>
+        <li class="btn">This job is unclaimed. @*@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })*@
+        <button type="button" class="btn btn-info">Claim this Job</button>
+        </li>
+        <li id="claim-job-display"></li>
+
         }
         else
         {
@@ -24,7 +48,6 @@
 
         }
     </ul>
-
 
     <hr />
 }

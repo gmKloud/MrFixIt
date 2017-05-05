@@ -1,39 +1,15 @@
 ﻿
 @model MrFixIt.Models.Job
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".btn-info").click(function () {
-            $.ajax({
-                type: 'GET',
-                data: { jobId: @Model.JobId, worker: @Model.Worker },
-                dataType: 'json',
-                contentType: 'application/json',
-                url: '@Url.Action("ClaimJob")',
-                success: function (result) {
-                    $('#claim-job-display').html(result);
-                }
-            });
-        });
-    });
-</script>
-
-
 <h2>Would you like to do this job?</h2>
 <hr />
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.JobId)
     @Html.HiddenFor(model => model.Title)
     @Html.HiddenFor(model => model.Description)
 
+}*@
     <h4>@Model.Title</h4>
-    <button type="button" class="btn btn-info" value="Claim This Job" />
-}
+    <button type="button" class="btn btn-info">Claim This Job</button>
 <p>@Html.ActionLink("Back to list", "Index")</p>
-
-<div id="claim-job-display">
-    <h3>
-        @Model.Worker.UserName, you have been assigned to this job
-    </h3>
-</div>
