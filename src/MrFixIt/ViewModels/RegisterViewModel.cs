@@ -24,3 +24,6 @@ namespace MrFixIt.ViewModels
         public string ConfirmPassword { get; set; }
     }
 }
+
+//Everything looks good here...
+

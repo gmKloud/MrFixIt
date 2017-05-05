@@ -13,8 +13,9 @@ namespace MrFixIt.Controllers
 {
     public class AccountController : Controller
     {
-        private MrFixItContext db = new MrFixItContext();
 
+        // ------NOTE Possibly may not need this - Double DB connections?? --//
+        private MrFixItContext db = new MrFixItContext();
 
         //Basic User Account Info here...
         private readonly MrFixItContext _db;
@@ -27,7 +28,8 @@ namespace MrFixIt.Controllers
             _signInManager = signInManager;
             _db = db;
         }
-
+        
+        // This IACTION Index WAS initially commented out - May need to have it commented in. 
         //public IActionResult Index()
         //{
         //    return View();
@@ -46,12 +48,13 @@ namespace MrFixIt.Controllers
             }
         }
 
-
+        //Good...
         public IActionResult Register()
         {
             return View();
         }
 
+        // This Register post appears good.
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -72,6 +75,9 @@ namespace MrFixIt.Controllers
             return View();
         }
 
+
+        //Secure Login appears to be functioning well.
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -86,6 +92,8 @@ namespace MrFixIt.Controllers
             }
         }
 
+
+        //LOgoff - good.
         [HttpGet]
         public async Task<IActionResult> LogOff()
         {

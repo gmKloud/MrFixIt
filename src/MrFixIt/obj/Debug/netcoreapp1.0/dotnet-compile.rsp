@@ -225,6 +225,6 @@ C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\Models\ApplicationUser.cs
 C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\Models\Job.cs
 C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\Models\MrFixItContext.cs
 C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\Models\Worker.cs
-C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\Models\ViewModels\JobWorker.cs
-C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\Models\ViewModels\LoginViewModel.cs
-C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\Models\ViewModels\RegisterViewModel.cs
+C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\ViewModels\JobWorker.cs
+C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\ViewModels\LoginViewModel.cs
+C:\Users\epicodus\Desktop\MrFixIt-dotnet\src\MrFixIt\ViewModels\RegisterViewModel.cs

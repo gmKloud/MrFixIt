@@ -11,3 +11,5 @@ namespace MrFixIt.ViewModels
         public string Password { get; set; }
     }
 }
+
+//GOOD

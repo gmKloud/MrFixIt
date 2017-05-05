@@ -5,27 +5,6 @@
 }
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".claim-job").click(function () {
-            console.log(this.id);
-            var selectedJobToClaim = this.id;
-            $.ajax({
-                type: 'GET',
-                data: { id: selectedJobToClaim },
-                dataType: 'json',
-                contentType: 'application/json',
-                url: '@Url.Action("Claim")',
-                success: function (result) {
-                    console.log(result);
-                    $('#claim-job-display').html(result);
-                }
-            });
-        });
-    });
-</script>
-
-
 <div class="text-center">
     <h3>Our Current Jobs</h3>
     @Html.ActionLink("Add a new job", "Create")
@@ -34,25 +13,51 @@
 {
     <ul>
         <li>@Job.Title</li>
+        <ul>
             <li>@Job.Description</li>
-    </ul>
+        </ul>
         @if (Job.Worker == null)
         {
-            <ul>
-        <li class="claim-job">This job is unclaimed. @*@Html.ActionLink("Claim This Job", "Jobs", new { @text = @Job.Title, id = Job.JobId })*@
-                <button type="button" class="claim-job btn btn-info">Claim this job</button>
+            <li class="btn">This job is unclaimed. 
+
+        <button id="@Job.JobId" type="button" class="claim-job">Claim job</button>
+        
+        @*@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })*@
         </li>
-           </ul>
-            <div id="claim-job-display"></div>
+
+        <div id="claim-job-display"></div>
+
         }
         else
         {
-        <ul>
             <li class="btn">This Job is claimed by @Job.Worker.FirstName @Job.Worker.LastName</li>
 
-        </ul>
         }
+    </ul>
+
 
     <hr />
 }
 
+<script type="text/javascript">
+        $(document).ready(function () {
+            $(".claim-job").click(function () {
+                //console.log("Model: " + jobId);
+                //console.log("Model2: " + Job.JobId);
+                console.log(this.id);
+                var clickedJob = this.id;
+                console.log(clickedJob);
+                    $.ajax({
+                    type: 'GET',
+                    data: { id: clickedJob.JobId },
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '@Url.Action("ClaimJobCtrl")',
+                    success: function (result) {
+                        console.log(result);
+                        $('#claim-job-display').html(result);
+                    }
+                });
+            });
+        });
+    </script>
