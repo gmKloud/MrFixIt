@@ -27,7 +27,27 @@
         <h3>Your Current Jobs:</h3>
         @foreach (var Job in Model.Jobs)
         {
+            <hr /><hr />
             <h5>@Job.Title</h5>
+
+            @if (Job.Pending == true && Job.Completed == false)
+            {
+
+                <h4>Mark @Job.Title as <button id="@Job.JobId" class="btn btn-success compl-true">Completed</button></h4>
+                <hr />
+
+                <h4>Mark @Job.Title as <button id="@Job.JobId" class="btn btn-danger pending-false">Pending</button> </h4>
+
+            }
+            else if (Job.Pending == false)
+            {
+                <h4>Mark <em>@Job.Title</em> as </h4> <button id="@Job.JobId" class="btn btn-info pending-true">Active</button>
+            }
+            else
+            {
+                <h3>Excellent. @Job.Title has been <em>completed</em>.</h3>
+                <p><em>Description: </em>@Job.Description</p>
+            }
 
         }
     </div>
@@ -54,6 +74,51 @@
                     url: '@Url.Action("changeToAvail")',
                     success: function (result) {
                         $('#avail-true').html(result);
+                        location.reload();
+                    }// end of success bracket
+                });
+            });
+            $(".pending-true").click(function () {
+                var selJob = this.id;
+                $.ajax({
+                    type: 'GET',
+                    data: { id: selJob},
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '@Url.Action("pendingToTrue")',
+                    success: function (result) {
+                        var resultString = "<h4>" + result.Title + "</h4>";
+                        $('#pend-true').html(result);
+                        location.reload();
+                    }// end of success bracket
+                });
+            });
+            $(".pending-false").click(function () {
+                var selJob = this.id;
+                $.ajax({
+                    type: 'GET',
+                    data: { id: selJob },
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '@Url.Action("pendingToFalse")',
+                    success: function (result) {
+                        var resultString = "<h4>" + result.Title + "</h4>";
+                        $('#pend-true').html(result);
+                        location.reload();
+                    }// end of success bracket
+                });
+            });
+            $(".compl-true").click(function () {
+                var selJob = this.id;
+                $.ajax({
+                    type: 'GET',
+                    data: { id: selJob },
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    url: '@Url.Action("complToTrue")',
+                    success: function (result) {
+                        var resultString = "<h4>" + result.Title + "</h4>";
+                        $('#pend-true').html(result);
                         location.reload();
                     }// end of success bracket
                 });
