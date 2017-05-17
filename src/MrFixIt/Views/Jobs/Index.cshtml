@@ -18,6 +18,8 @@
 
         @if (Job.Worker == null)
         {
+            <h4>Make sure to complete your worker profile to claim jobs!</h4>
+
             <ul>
             <li class="btn">This job is unclaimed. 
 
@@ -47,7 +49,6 @@
             $(".claim-job").click(function () {
                 console.log(this.id);
                 var jobMod = this.id
-                console.log(jobMod);
                     $.ajax({
                         type: 'GET',
                         data: { id: jobMod },
@@ -55,8 +56,8 @@
                     contentType: 'application/json',
                     url: '@Url.Action("ClaimJobCtrl")',
                         success: function (result) {
-                            console.log(result);
-                        $('#claim-job-display').html(result);
+                            var resultString = "<h4> Perfect! " + result + ", You have claimed this job </h4>";
+                        $('#claim-job-display').html(resultString);
                     }
                 });
             });

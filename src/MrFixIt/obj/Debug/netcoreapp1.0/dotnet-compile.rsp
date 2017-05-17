@@ -220,6 +220,10 @@ C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20161206233149_In
 C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20161206233149_Initial.Designer.cs
 C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20170505160601_loadinitial.cs
 C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20170505160601_loadinitial.Designer.cs
+C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20170517190648_appuser.cs
+C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20170517190648_appuser.Designer.cs
+C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20170517191040_outuser.cs
+C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\20170517191040_outuser.Designer.cs
 C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Migrations\MrFixItContextModelSnapshot.cs
 C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Models\ApplicationUser.cs
 C:\Users\epicodus\Desktop\GrinilMrFixIt\src\MrFixIt\Models\Job.cs
