@@ -21,12 +21,13 @@
             <ul>
             <li class="btn">This job is unclaimed. 
 
-        <button id="@Job.JobId" type="button" class="claim-job">Claim job</button>
+        <button id="@Job" type="button" class="claim-job">Claim job</button>
         
         @*@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })*@
         </li>
         </ul>
 
+        <div id="claim-job-display"></div>
 
         }
         else
@@ -34,7 +35,6 @@
             <ul>
             <li class="btn">This Job is claimed by @Job.Worker.FirstName @Job.Worker.LastName</li>
     </ul>
-        <div id="claim-job-display"></div>
 
         }
 
@@ -46,11 +46,11 @@
         $(document).ready(function () {
             $(".claim-job").click(function () {
                 console.log(this.id);
-                var clicked = this.id
+                var jobMod = this.id
                 console.log(clicked);
                     $.ajax({
-                        type: 'GET',
-                        data: { id: clicked },
+                        type: 'POST',
+                        data: { job: jobMod },
                         dataType: 'json',
                     contentType: 'application/json',
                     url: '@Url.Action("ClaimJobCtrl")',
