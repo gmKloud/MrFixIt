@@ -70,22 +70,18 @@ namespace MrFixIt.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        public async Task<IActionResult> ClaimJobCtrl(int id)
+        public IActionResult ClaimJobCtrl(int id)
         {
 
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            Worker currentwrkr = _db.Workers.FirstOrDefault(w => w.UserName == currentUser.UserName);
-            var inclWorkerWithJob = _db.Jobs.Include(i => i.Worker).ToList();
-            Job selJob = _db.Jobs.FirstOrDefault(j => j.JobId == id);
-            //var thisJob = db.Jobs.FirstOrDefault(m => m.JobId == id);
-            ////var getWorker = db.Jobs.Include(i => i.Worker).ToList();
-            ////Worker worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
-            ////thisJob.Add(worker);
-            ////db.Entry(worker).State = EntityState.Modified;
-            //db.Entry(thisJob).State = EntityState.Modified;
-            //db.SaveChanges();
-            return Json(selJob);
+            Job thisJob = db.Jobs.FirstOrDefault(m => m.JobId == id);
+            //var getWorker = db.Jobs.Include(i => i.Worker).ToList();
+            Worker worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
+            //thisJob.Add(worker);
+            db.Entry(worker).State = EntityState.Modified;
+            db.Entry(thisJob).State = EntityState.Modified;
+            db.SaveChanges();
+            var nameWroker = worker.FirstName + worker.LastName; 
+            return Json(nameWroker);
         }
     }
 }
