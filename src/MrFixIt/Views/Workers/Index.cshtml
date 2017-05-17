@@ -10,19 +10,54 @@
 
     <div class="text-center">
         <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
+        @if (Model.Avaliable == true)
+        {
+            <h2>Please @Html.ActionLink("select a job", "Index", "Jobs") or set your status as</h2><button id="@Model.WorkerId" class="set-unavail">Unavailable</button>
+
+            <div id="set-false"></div>
+        }
+        else 
+        {
+            <p>You are already assigned to a job.</p>
+
+            <button id="@Model.WorkerId" class="set-avail">Set Yourself as Available</button>
+
+            <div id="avail-true"></div>
+        }
         <h3>Your Current Jobs:</h3>
         @foreach (var Job in Model.Jobs)
         {
             <h5>@Job.Title</h5>
 
         }
-        @if (Model.Avaliable)
-        {
-            <h2>Please @Html.ActionLink("select a job", "Index", "Jobs").</h2>
-        }
-        else
-        {
-            <p>You are already assigned to a job.</p>
-        }
     </div>
 }
+<script type="text/javascript">
+        $(document).ready(function () {
+            $(".set-unavail").click(function () {
+                var idWorker = this.id
+                    $.ajax({
+                        type: 'GET',
+                        data: { id: idWorker },
+                    url: '@Url.Action("changeToUnavail")',
+                        success: function (result) {
+                            $('#set-false').html(result);
+                            location.reload();
+                    }// end of success bracket
+                });
+            });
+            $(".set-avail").click(function () {
+                var idWorker = this.id
+                $.ajax({
+                    type: 'GET',
+                    data: { id: idWorker },
+                    url: '@Url.Action("changeToAvail")',
+                    success: function (result) {
+                        $('#avail-true').html(result);
+                        location.reload();
+                    }// end of success bracket
+                });
+            });
+        }); //initial document ready ending bracket
+</script>
+

@@ -41,5 +41,25 @@ namespace MrFixIt.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //setting a worker to status unavail
+        public IActionResult changeToUnavail(int id)
+        {
+            Worker thisWorker = db.Workers.FirstOrDefault(w => w.WorkerId == id);
+            thisWorker.Avaliable = false;
+            db.Entry(thisWorker).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //setting a worker to status avail
+        public IActionResult changeToAvail(int id)
+        {
+            Worker thisWorker = db.Workers.FirstOrDefault(w => w.WorkerId == id);
+            thisWorker.Avaliable = true;
+            db.Entry(thisWorker).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
