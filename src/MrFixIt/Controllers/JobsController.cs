@@ -70,13 +70,13 @@ namespace MrFixIt.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        public IActionResult ClaimJobCtrl(Job job)
+        public IActionResult ClaimJobCtrl(int id)
         {
 
-            var thisJobId = db.Jobs.FirstOrDefault(m => m.JobId == job.JobId);
+            Job thisJobId = db.Jobs.FirstOrDefault(m => m.JobId == id);
             //var getWorker = db.Jobs.Include(i => i.Worker).ToList();
-            var worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
-            thisJobId.Add(worker);
+            Worker worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
+            thisJobId.Worker = worker;
             db.Entry(worker).State = EntityState.Modified;
             db.Entry(thisJobId).State = EntityState.Modified;
             db.SaveChanges();

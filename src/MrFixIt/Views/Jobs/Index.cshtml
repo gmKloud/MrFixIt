@@ -21,7 +21,7 @@
             <ul>
             <li class="btn">This job is unclaimed. 
 
-        <button id="@Job" type="button" class="claim-job">Claim job</button>
+        <button id="@Job.JobId" type="button" class="claim-job">Claim job</button>
         
         @*@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })*@
         </li>
@@ -47,10 +47,10 @@
             $(".claim-job").click(function () {
                 console.log(this.id);
                 var jobMod = this.id
-                console.log(clicked);
+                console.log(jobMod);
                     $.ajax({
-                        type: 'POST',
-                        data: { job: jobMod },
+                        type: 'GET',
+                        data: { id: jobMod },
                         dataType: 'json',
                     contentType: 'application/json',
                     url: '@Url.Action("ClaimJobCtrl")',
